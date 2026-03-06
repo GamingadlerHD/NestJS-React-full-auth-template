@@ -12,9 +12,8 @@ import { AuthService } from './auth.service';
 import { PassportLocalGuard } from './guards/passport-local.guard';
 import { PassportJwtAuthGuard } from './guards/passport-jwt.guard';
 import { PassportJwtRefreshGuard } from './guards/passport-jwt-refresh.guard';
-import { access } from 'fs';
 
-@Controller('auth-v2')
+@Controller('auth')
 export class PassportAuthController {
   constructor(private authService: AuthService) { }
 
@@ -44,7 +43,7 @@ export class PassportAuthController {
 
   @HttpCode(HttpStatus.OK)
   @Post('logout')
-  async logout(@Request() _, @Response({ passthrough: true }) res) {
+  async logout(@Response({ passthrough: true }) res) {
     res.clearCookie('refreshToken');
     return { message: 'Logged out successfully' };
   }
